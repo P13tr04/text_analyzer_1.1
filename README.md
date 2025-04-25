@@ -36,6 +36,6 @@ venv\Scripts\activate  # Windows
 pip install flask python-magic-bin werkzeug python-dotenv
 ```
 
-##Ejemplo de uso
+## Ejemplo de uso
 
 https://text-analyzer-hpij.onrender.com/
