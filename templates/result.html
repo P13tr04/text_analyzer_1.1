@@ -1,114 +1,33 @@
-{% extends "base.html" %}
-
-
-
-{% block content %}
-
-<div class="card shadow-sm">
-
-    <div class="card-header">
-
-        <h5 class="mb-0">Resultados del análisis: {{ filename }}</h5>
-
-    </div>
-
-    <div class="card-body">
-
-        <div class="row mb-4">
-
-            <div class="col-md-6">
-
-                <ul class="list-group">
-
-                    <li class="list-group-item d-flex justify-content-between">
-
-                        <span>Tamaño:</span>
-
-                        <span>{{ size }}</span>
-
-                    </li>
-
-                    <li class="list-group-item d-flex justify-content-between">
-
-                        <span>Fecha de subida:</span>
-
-                        <span>{{ date }}</span>
-
-                    </li>
-
-                </ul>
-
-            </div>
-
-        </div>
-
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados del Análisis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Resultados del Análisis</h1>
         
-
-        <h5 class="mb-3">Estadísticas de contenido:</h5>
-
-        <div class="row">
-
-            <div class="col-md-3">
-
-                <div class="card text-white bg-primary mb-3">
-
-                    <div class="card-body">
-
-                        <h2 class="card-title text-center">{{ lines }}</h2>
-
-                        <p class="card-text text-center">Líneas</p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="col-md-3">
-
-                <div class="card text-white bg-success mb-3">
-
-                    <div class="card-body">
-
-                        <h2 class="card-title text-center">{{ words }}</h2>
-
-                        <p class="card-text text-center">Palabras</p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="col-md-3">
-
-                <div class="card text-white bg-danger mb-3">
-
-                    <div class="card-body">
-
-                        <h2 class="card-title text-center">{{ characters }}</h2>
-
-                        <p class="card-text text-center">Caracteres</p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
+        <div class="result-card">
+            <div class="result-item"><strong>Archivo:</strong> {{ filename }}</div>
+            <div class="result-item"><strong>Tipo de archivo (MIME Type):</strong> {{ file_type }}</div>
+            <div class="result-item"><strong>Fecha de análisis:</strong> {{ date }}</div>
+            <div class="result-item"><strong>Tamaño del archivo:</strong> {{ size }} ({{ size_bytes }} bytes)</div>
+            
+            <h3 style="margin-top: 20px;">Estadísticas del archivo:</h3>
+            <div class="result-item">→ Líneas: {{ lines }}</div>
+            <div class="result-item">→ Palabras: {{ words }}</div>
+            <div class="result-item">→ Caracteres: {{ characters }}</div>
         </div>
-
         
-
-        <div class="mt-4">
-
-            <a href="/" class="btn btn-primary">Nuevo análisis</a>
-
+        <h3>Previsualización:</h3>
+        <pre style="background-color: #f4f4f4; padding: 10px; border: 1px solid #ddd; border-radius: 5px; max-height: 200px; overflow-y: auto;">{{ preview }}</pre>
+        
+        <div style="display: flex; gap: 10px; margin-top: 20px;">
+            <a href="{{ url_for('upload_file') }}" class="btn btn-another">Analizar Otro Archivo</a>
         </div>
-
     </div>
-
-</div>
-
-{% endblock %}
+</body>
+</html>
